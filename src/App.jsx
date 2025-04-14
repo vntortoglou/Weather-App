@@ -11,17 +11,6 @@ const App = () => {
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
 
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem("weatherFavorites");
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("weatherFavorites", JSON.stringify(favorites));
-  }, [favorites]);
-
   const fetchWeatherData = async (cityName) => {
     const apiKey = "b1a33d8669032f31d2aa1fbc63fb17c7";
 
@@ -61,6 +50,30 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    const loadFavorites = async () => {
+      const storedFavorites = localStorage.getItem("weatherFavorites");
+      console.log("Loaded from localStorage:", storedFavorites);
+      if (storedFavorites) {
+        const parsedFavorites = JSON.parse(storedFavorites);
+        const updatedFavorites = await Promise.all(
+          parsedFavorites.map(async (fav) => {
+            const data = await fetchWeatherData(fav.city);
+            return data || fav; // fallback to stored data if fetch fails
+          })
+        );
+        setFavorites(updatedFavorites);
+      }
+    };
+
+    loadFavorites();
+  }, []);
+
+  useEffect(() => {
+    console.log("Saving to localStorage:", favorites);
+    localStorage.setItem("weatherFavorites", JSON.stringify(favorites));
+  }, [favorites]);
+
   const handleCityChange = async (cityName) => {
     setCity(cityName);
     const data = await fetchWeatherData(cityName);
@@ -81,6 +94,7 @@ const App = () => {
         (fav) => fav.city.toLowerCase() === weatherData.city.toLowerCase()
       )
     ) {
+      console.log("Adding to favorites:", weatherData);
       setFavorites((prev) => [...prev, weatherData]);
     }
   };
