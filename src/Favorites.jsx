@@ -1,55 +1,25 @@
-// components/Favorites.jsx
-import React, { useState } from "react";
+import React from "react";
+import FavoriteCard from "./FavoritesCard"; // NEW import!
 
 const Favorites = ({ favorites, onRemoveFavorite }) => {
-  const [toggleStates, setToggleStates] = useState({});
-
-  const toggleTemp = (city) => {
-    setToggleStates((prev) => ({
-      ...prev,
-      [city]: !prev[city],
-    }));
-  };
-
-  const convertTemp = (tempC, isFahrenheit) =>
-    isFahrenheit ? (tempC * 9) / 5 + 32 : tempC;
-
   return (
-    <div className="favorites-container">
-      <h2>Favorite Cities</h2>
+    <div className="w-full max-w-6xl mx-auto mt-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-[#EEF2F5] mb-8">
+        Favorite Cities
+      </h2>
 
       {favorites.length === 0 ? (
-        <p>No favorites added.</p>
+        <p className="text-center text-[#5fe0e4]">No favorites added.</p>
       ) : (
-        favorites.map((fav, index) => {
-          const isFahrenheit = toggleStates[fav.city] || false;
-          const unit = isFahrenheit ? "°F" : "°C";
-          const temp = convertTemp(fav.temperature, isFahrenheit).toFixed(1);
-
-          return (
-            <div key={index} className="weather-card">
-              <h3>{fav.city}</h3>
-              <img src={fav.icon} alt={fav.description} />
-              <p>
-                <strong>Temperature:</strong> {temp}
-                {unit}
-                <button onClick={() => toggleTemp(fav.city)}>
-                  Switch to {isFahrenheit ? "°C" : "°F"}
-                </button>
-              </p>
-              <p>
-                <strong>Description:</strong> {fav.description}
-              </p>
-              <p>
-                <strong>Humidity:</strong> {fav.humidity}%
-              </p>
-              <p>
-                <strong>Wind Speed:</strong> {fav.windSpeed} m/s
-              </p>
-              <button onClick={() => onRemoveFavorite(fav.city)}>Remove</button>
-            </div>
-          );
-        })
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {favorites.map((fav) => (
+            <FavoriteCard
+              key={fav.city}
+              fav={fav}
+              onRemoveFavorite={onRemoveFavorite}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
