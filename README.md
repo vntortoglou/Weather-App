@@ -42,19 +42,3 @@ npm run dev
 
 5. Open in browser
 Visit http://localhost:5173
-
-
-Project Structure :
-
-src/
-├── CityDetails.jsx
-├── WeatherStats.jsx
-├── SunriseSunset.jsx
-├── Forecast.jsx
-├── SearchBar.jsx
-├── Favorites.jsx
-├── FavoriteCard.jsx
-└── SwitchButton.jsx
-├── App.jsx
-├── main.jsx
-└── index.css
