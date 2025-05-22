@@ -1,12 +1,62 @@
-# React + Vite
+React Weather App
+This is a responsive and modern weather application built with React and Tailwind CSS. It allows users to search for any city, view current weather conditions, a 7-day forecast, and manage a list of favorite cities. Users can also toggle between Celsius and Fahrenheit units.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project Overview
+This app includes:
 
-Currently, two official plugins are available:
+Real-time weather data (temperature, humidity, wind speed, sunrise and sunset)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+7-day weather forecast
 
-## Expanding the ESLint configuration
+City search functionality
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Favorite cities list with full weather details
+
+Toggle between Celsius and Fahrenheit
+
+Responsive, clean neobrutalist-inspired UI
+
+Built With
+React
+
+Tailwind CSS
+
+Vite
+
+OpenWeatherMap API
+
+LocalStorage (for saving favorites)
+
+How to Run the Project Locally
+1. Clone the repository
+git clone https://github.com/yourusername/react-weather-app.git
+cd react-weather-app
+
+2. Install dependencies
+npm install
+
+3. Create a .env file in the root folder
+Add your OpenWeatherMap API key like this:
+VITE_API_KEY=your_openweathermap_api_key
+
+4. Run the project
+npm run dev
+
+5. Open in browser
+Visit http://localhost:5173
+
+Project Structure :
+
+src/
+├── components/
+│   ├── CityDetails.jsx
+│   ├── WeatherStats.jsx
+│   ├── SunriseSunset.jsx
+│   ├── Forecast.jsx
+│   ├── SearchBar.jsx
+│   ├── Favorites.jsx
+│   ├── FavoriteCard.jsx
+│   └── SwitchButton.jsx
+├── App.jsx
+├── main.jsx
+└── index.css
